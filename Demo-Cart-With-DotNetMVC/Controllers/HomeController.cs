@@ -1,5 +1,6 @@
 ﻿using Demo_Cart_With_DotNetMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,56 +13,39 @@ namespace Demo_Cart_With_DotNetMVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public IConfiguration server;
+        public HomeController(IConfiguration server)
         {
-            _logger = logger;
+            this.server = server;
         }
 
         public IActionResult HomePage()
         {
             BookModel listBook = new BookModel();
-            listBook.ListBookModels.Add(new BookModel
+
+            string sql = "SELECT * FROM book";
+            Database db = new Database(sql, this.server);
+            if (db.data.HasRows)
             {
-                book_id=1,
-                book_name="Đắt nhân tâm",
-                book_author="Nguyễn Nhật Ánh",
-                price=100000
-            });
-            listBook.ListBookModels.Add(new BookModel
-            {
-                book_id = 2,
-                book_name = "Nhà giả kim",
-                book_author = "Nguyễn Nhật Ánh",
-                price = 100000
-            });
-            listBook.ListBookModels.Add(new BookModel
-            {
-                book_id = 3,
-                book_name = "Chiếc thuyền ngoài xa",
-                book_author = "Tô Hoài",
-                price = 50000
-            });
-            listBook.ListBookModels.Add(new BookModel
-            {
-                book_id = 4,
-                book_name = "Code dạo ký sự",
-                book_author = "Phạm Huy Hoàng",
-                price = 100000
-            });
-            listBook.ListBookModels.Add(new BookModel
-            {
-                book_id = 5,
-                book_name = "Tony buổi sáng",
-                book_author = "Nguyễn Nhật Ánh",
-                price = 150000
-            });
+                while (db.data.Read())
+                {
+                    listBook.ListBookModels.Add(new BookModel
+                    {
+                        book_id = long.Parse(db.data[0].ToString()),
+                        book_name = db.data[1].ToString(),
+                        book_author = db.data[2].ToString(),
+                        price = long.Parse(db.data[3].ToString())
+                    });
+                }
+            }
+            db.Close();
             List<BookModel> model = listBook.ListBookModels.ToList();
             return View(model);
         }
 
-        public IActionResult ProductDetail()
+        public IActionResult ProductDetail( int bookId)
         {
+
             return View();
         }
 

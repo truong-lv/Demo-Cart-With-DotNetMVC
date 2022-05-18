@@ -10,4 +10,8 @@
     <PackageReference Include="Npgsql.FSharp" Version="4.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Cart\" />
+  </ItemGroup>
+
 </Project>
