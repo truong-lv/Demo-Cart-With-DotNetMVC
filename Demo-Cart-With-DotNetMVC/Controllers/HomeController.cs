@@ -21,7 +21,7 @@ namespace Demo_Cart_With_DotNetMVC.Controllers
 
         public IActionResult HomePage()
         {
-            BookModel listBook = new BookModel();
+            List<BookModel> listBook = new List<BookModel>();
 
             string sql = "SELECT * FROM book";
             Database db = new Database(sql, this.server);
@@ -29,7 +29,7 @@ namespace Demo_Cart_With_DotNetMVC.Controllers
             {
                 while (db.data.Read())
                 {
-                    listBook.ListBookModels.Add(new BookModel
+                    listBook.Add(new BookModel
                     {
                         book_id = long.Parse(db.data[0].ToString()),
                         book_name = db.data[1].ToString(),
@@ -39,15 +39,10 @@ namespace Demo_Cart_With_DotNetMVC.Controllers
                 }
             }
             db.Close();
-            List<BookModel> model = listBook.ListBookModels.ToList();
-            return View(model);
+            return View(listBook);
         }
 
-        public IActionResult ProductDetail( int bookId)
-        {
-
-            return View();
-        }
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

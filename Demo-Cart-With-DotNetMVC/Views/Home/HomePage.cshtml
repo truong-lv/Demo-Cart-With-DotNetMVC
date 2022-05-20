@@ -25,21 +25,26 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var book in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.book_id)
+                @book.book_id
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.book_name)
+               @book.book_name
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.book_author)
+                @book.book_author
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.price)
+                @book.price
             </td>
-        </tr>
+            <td>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Details/1" >Giỏ hàng</a>
+</td>
+
+
+</tr>
 }
     </tbody>
 </table>

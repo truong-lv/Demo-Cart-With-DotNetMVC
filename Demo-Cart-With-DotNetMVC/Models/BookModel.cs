@@ -7,8 +7,6 @@ namespace Demo_Cart_With_DotNetMVC.Models
 {
     public class BookModel
     {
-        public List<BookModel> ListBookModels = new List<BookModel>();
-
         public long book_id { get; set; }
         public String book_name { get; set; }
         public String book_author { get; set; }

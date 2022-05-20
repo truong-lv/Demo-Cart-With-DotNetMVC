@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
@@ -45,8 +45,9 @@ namespace Demo_Cart_With_DotNetMVC
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthorization();//xác thực quyền truy cập
 
+            //tạo ra các ánh xạ
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
