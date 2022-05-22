@@ -1,4 +1,5 @@
 ﻿using Demo_Cart_With_DotNetMVC.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -39,6 +40,10 @@ namespace Demo_Cart_With_DotNetMVC.Controllers
                 }
             }
             db.Close();
+
+
+            string username=HttpContext.Session.GetString("username");
+            TempData["ThongBao"] = "Xin chào " + username;
             return View(listBook);
         }
 

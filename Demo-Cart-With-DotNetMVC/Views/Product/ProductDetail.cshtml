@@ -4,39 +4,77 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="row mt-4 book-detail p-3 bg-white rounded">
+    <div class="col-md-4 col-lg-4" style="text-align: center">
+        <img style="height:100%;" class="card-img-top" src="/img/logo-mwg.png"
+             alt="Card image cap">
+    </div>
+    <div class="col-xs-8 col-md-8">
+        <h1>@Model.book_name</h1>
+        <div class="row">
+            <div class="col-xs-6 col-md-12">
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <p>Tác giả: <strong>@Model.book_author</strong></p>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <p>Thể loại: <strong>Sách hay</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <p>Nhà xuất bản: <strong>Nhà xuất bản hay</strong></p>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <p>Ngày xuất bản: <strong>26/09/2022</strong></p>
+                    </div>
+                </div>
 
-<div>
-    <h4>BookModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.book_id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.book_id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.book_name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.book_name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.book_author)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.book_author)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.price)
-        </dd>
-    </dl>
+
+                <h4 class="text-danger font-weight-bold">@Model.price VNĐ</h4>
+                <p class="text-muted">Số lượng tồn: <strong>30</strong></p>
+                <button type="button" id="btn-add-to-cart"
+                        class="btn btn-success wow tada">
+                    <i class="fas fa-plus-circle"></i> Thêm giỏ hàng
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<h5 class="p-2 ">Đánh Giá Sản Phẩm</h5>
+<div class="container d-flex justify-content-left">
+    <div class="card-review text-center mb-5">
+        <div class="rate  py-3 ">
+            <div class="form-group">
+                <label for="comment">Ý kiến của bạn về sản phẩm</label>
+                <textarea oninput="saveComment()" class="form-control" id="comment" name="comment" maxlength="199" rows="1"></textarea>
+            </div>
+
+            <div class="buttons px-4 mt-0">
+                <button class="btn btn-warning btn-block rating-submit" onclick="onComment()">
+                    Đánh giá
+                </button>
+            </div>
+        </div>
+    </div>
+ </div>
+<script type="text/javascript">
+    function saveComment() {
+    let value = document.getElementById("comment").value;
+        sessionStorage.setItem(@Model.book_id, value)
+
+    }
+
+    (function loadComment() {
+        let value = sessionStorage.getItem(@Model.book_id);
+        console.log(value)
+        document.getElementById("comment").value = value;
+    })()
+
+    function onComment(){
+        sessionStorage.removeItem(@Model.book_id);
+        document.getElementById("comment").value = "";
+        alert("Bình luận thành công")
+    }
+</script>

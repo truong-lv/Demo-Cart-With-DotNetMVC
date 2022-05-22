@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Demo_Cart_With_DotNetMVC.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,64 +11,49 @@ namespace Demo_Cart_With_DotNetMVC.Controllers
 {
     public class AuthController : Controller
     {
+        public IConfiguration server;
+
+        public AuthController(IConfiguration server)
+        {
+            this.server = server;
+        }
         // GET: AuthController
-        public ActionResult Index()
+        public ActionResult Signin()
         {
-            return View();
+            return View("Views/Login/LoginPage.cshtml");
         }
 
-        // GET: AuthController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: AuthController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+       
 
         // POST: AuthController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Signin(AccountModel account)
         {
-            try
+            string sql = "SELECT * FROM account WHERE username='" + account.userName +"' AND password='"+account.passWord+"'";
+            Database db = new Database(sql, this.server);
+            if (db.data.HasRows)
             {
-                return RedirectToAction(nameof(Index));
+         
+                HttpContext.Session.SetString("username",account.userName);
+                HttpContext.Session.SetString("password",account.passWord);
+                return Redirect(Url.Action("HomePage", "Home"));
             }
-            catch
+            else
             {
-                return View();
+                TempData["ThongBao"] = "Tài khoản hoặc mật khẩu không hợp lệ";
+                return RedirectToAction(nameof(Signin));
+                
             }
+
         }
 
-        // GET: AuthController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: AuthController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: AuthController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Signout()
         {
-            return View();
+            HttpContext.Session.Remove("username");
+            return RedirectToAction(nameof(Signin));
         }
 
         // POST: AuthController/Delete/5

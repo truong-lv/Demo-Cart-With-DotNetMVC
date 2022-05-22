@@ -2,49 +2,53 @@
 
 @{
     ViewData["Title"] = "HomePage";
+    var mes = TempData["ThongBao"] as string;
 }
 
-<h1>Bookstore Products</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.book_id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.book_name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.book_author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.price)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var book in Model) {
-        <tr>
-            <td>
-                @book.book_id
-            </td>
-            <td>
-               @book.book_name
-            </td>
-            <td>
-                @book.book_author
-            </td>
-            <td>
-                @book.price
-            </td>
-            <td>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Details/1" >Giỏ hàng</a>
-</td>
+<h1>@mes</h1>
 
 
-</tr>
-}
-    </tbody>
-</table>
+<div class="row mt-4 card">
+    <div class="p-2 d-flex align-items-center border-bottom border-success">
+        <img style="width: 30px; height: auto" src="đss">&ensp;
+        <strong>GỞI Ý HÔM NAY</strong>
+    </div>
+    <div class="card-body">
+        <ul class="row list-product">
+            @foreach (var book in Model)
+            {
+                <li class="col-md-4 col-lg-3 wow bounceIn mb-3">
+                    <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-id="@book.book_id" class="itemside border">
+                        <span class="aside text-center">
+                            <img src="./img/logo-mwg.png" class="img-sm">
+                        </span>
+                        <span class="info">
+                            <span class="title" id="book-name">
+                                @book.book_name <br>
+                                <span class="text-muted">@book.book_author </span>
+                            </span>
+                            <span class="text-danger font-weight-bold" id="book-price">@book.price VNĐ</span>
+                        </span>
+                    </a> <br>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<!--Modal: modalDiscount-->
+<script src="~/js/myCookie.js"></script>
+<script type="text/javascript">
+    if (getCookie("promo") == "" || getCookie("promo") == "true") {
+
+        console.log("ssss")
+
+        let result = confirm("Quảng cáo nè, bạn có quan tâm không?")
+        if (result) {
+            setCookie("promo", "true",60)
+        } else {
+            setCookie("promo", "false",60)
+        }
+        
+    }
+</script>
