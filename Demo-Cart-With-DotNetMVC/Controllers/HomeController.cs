@@ -43,7 +43,7 @@ namespace Demo_Cart_With_DotNetMVC.Controllers
 
 
             string username=HttpContext.Session.GetString("username");
-            TempData["ThongBao"] = "Xin chào " + username;
+            TempData["ThongBao"] =username;
             return View(listBook);
         }
 

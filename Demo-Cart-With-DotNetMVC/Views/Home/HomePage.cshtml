@@ -10,7 +10,7 @@
 
 <div class="row mt-4 card">
     <div class="p-2 d-flex align-items-center border-bottom border-success">
-        <img style="width: 30px; height: auto" src="đss">&ensp;
+        <img style="width: 30px; height: auto" src="./img/ico_dealhot.png">&ensp;
         <strong>GỞI Ý HÔM NAY</strong>
     </div>
     <div class="card-body">
@@ -36,19 +36,37 @@
     </div>
 </div>
 
+
 <!--Modal: modalDiscount-->
 <script src="~/js/myCookie.js"></script>
 <script type="text/javascript">
-    if (getCookie("promo") == "" || getCookie("promo") == "true") {
-
-        console.log("ssss")
+    if (getCookie("promo") !== "false") {
 
         let result = confirm("Quảng cáo nè, bạn có quan tâm không?")
-        if (result) {
-            setCookie("promo", "true",60)
-        } else {
-            setCookie("promo", "false",60)
+        if (!result) {
+            setCookie("promo", "false", 60)
         }
-        
+
     }
 </script>
+
+@*//kiểm tra nếu người dùng đã đăng nhập và có giỏ hàng trên localStorage*@
+@{ if (mes != null)
+    {
+        <script type="text/javascript">
+            if (localAdapter.getCart()) {
+                let listBookId = localAdapter.getCart().map(item => item.book_id).join(",");
+                $.ajax({
+                    type: "POST",
+                    url: "/Cart/Orders?listBookId=" + listBookId,
+                    success: function (value) {
+                        localAdapter.clearCart();
+                        cart.items=[]
+                    }, error: (er) => {
+                        console.log(er.responseText)
+                    }
+                })
+            }
+
+        </script>
+    } }

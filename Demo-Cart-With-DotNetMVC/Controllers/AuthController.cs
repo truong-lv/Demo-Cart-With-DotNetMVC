@@ -56,6 +56,7 @@ namespace Demo_Cart_With_DotNetMVC.Controllers
             return RedirectToAction(nameof(Signin));
         }
 
+
         // POST: AuthController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]

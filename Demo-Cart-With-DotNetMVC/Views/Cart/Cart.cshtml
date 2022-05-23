@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Demo_Cart_With_DotNetMVC.Models.CartModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Giỏ hàng</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tên sách
+            </th>
+            <th>
+                Tác giả
+            </th>
+            <th>
+                Giá
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.book.book_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.book.book_author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.book.price) VNĐ
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

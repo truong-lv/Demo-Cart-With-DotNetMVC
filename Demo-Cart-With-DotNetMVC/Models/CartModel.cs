@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Demo_Cart_With_DotNetMVC.Models
 {
-    public class AccountModel
+    public class CartModel
     {
         public String userName { get; set; }
-        public String passWord { get; set; }
+        public BookModel book { get; set; }
     }
 }

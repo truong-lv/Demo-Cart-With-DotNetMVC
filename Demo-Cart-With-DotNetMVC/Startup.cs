@@ -32,6 +32,7 @@ namespace Demo_Cart_With_DotNetMVC
                 options.Cookie.Name = "user_id";
                 options.IdleTimeout = TimeSpan.FromHours(1);
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +54,8 @@ namespace Demo_Cart_With_DotNetMVC
             app.UseRouting();
             app.UseSession();
 
-            app.UseAuthorization();//xác thực quyền truy cập
+            app.UseStatusCodePages();
+            app.UseAuthorization();
 
             //tạo ra các ánh xạ
             app.UseEndpoints(endpoints =>
@@ -62,6 +64,8 @@ namespace Demo_Cart_With_DotNetMVC
                     name: "default",
                     pattern: "{controller=Home}/{action=HomePage}/{id?}");
             });
+
+           
         }
     }
 }
