@@ -1,0 +1,246 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.2
+-- Dumped by pg_dump version 14.2
+
+-- Started on 2022-05-26 15:15:12
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 209 (class 1259 OID 66229)
+-- Name: account; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.account (
+    username character varying(255) NOT NULL,
+    password character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.account OWNER TO postgres;
+
+--
+-- TOC entry 211 (class 1259 OID 66237)
+-- Name: book; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.book (
+    book_id bigint NOT NULL,
+    book_name character varying(255) NOT NULL,
+    book_author character varying(255),
+    book_price bigint
+);
+
+
+ALTER TABLE public.book OWNER TO postgres;
+
+--
+-- TOC entry 210 (class 1259 OID 66236)
+-- Name: book_book_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.book ALTER COLUMN book_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public.book_book_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    MAXVALUE 1000
+    CACHE 1
+);
+
+
+--
+-- TOC entry 212 (class 1259 OID 66244)
+-- Name: cart; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cart (
+    username character varying(255) NOT NULL,
+    book_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.cart OWNER TO postgres;
+
+--
+-- TOC entry 213 (class 1259 OID 66259)
+-- Name: review; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.review (
+    username character varying(255) NOT NULL,
+    book_id bigint NOT NULL,
+    "time" date,
+    content character varying(255)
+);
+
+
+ALTER TABLE public.review OWNER TO postgres;
+
+--
+-- TOC entry 3327 (class 0 OID 66229)
+-- Dependencies: 209
+-- Data for Name: account; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.account (username, password) FROM stdin;
+vinhtruong	123456
+truong-lv	123456
+namnguyen	123456
+sangphuoc	123456
+luongvu	123456
+\.
+
+
+--
+-- TOC entry 3329 (class 0 OID 66237)
+-- Dependencies: 211
+-- Data for Name: book; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.book (book_id, book_name, book_author, book_price) FROM stdin;
+1	Đắc nhân tâm	Dale Carnegie	100000
+2	Code dạo ký sự	Phạm Huy Hoàng	80000
+3	Chuông nguyện hồn ai	Hamingway	120000
+4	Nghĩ giàu làm giàu	Napoleon Hill	120000
+5	You Can Win	Shiv Khera	120000
+6	Bí mật tư duy triệu phú	T. Harv Eker	120000
+7	Trên đường băng	Tony 	120000
+8	Dám nghĩ lớn	David J Schwartz	120000
+9	Tuổi trẻ đáng giá bao nhiêu	Rosie Nguyễn	120000
+10	Khu Vườn Bí Mật	Frances Hodgson Burnett	120000
+11	Người Đua Diều	Khaled Hosseini	120000
+12	Số Đỏ	Vũ Trọng Phụng	120000
+13	Vua Thành Thái	Nguyễn Hữu Nam	120000
+14	Trump - Đừng Bao Giờ Bỏ Cuộc	Donald J.Trump	120000
+15	Một Người Việt Trầm Lặng	Jean Claude Pomonti	120000
+16	Hồi Ký Lý Quang Diệu	Lý Quang Diệu	120000
+\.
+
+
+--
+-- TOC entry 3330 (class 0 OID 66244)
+-- Dependencies: 212
+-- Data for Name: cart; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.cart (username, book_id) FROM stdin;
+vinhtruong	1
+vinhtruong	5
+\.
+
+
+--
+-- TOC entry 3331 (class 0 OID 66259)
+-- Dependencies: 213
+-- Data for Name: review; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.review (username, book_id, "time", content) FROM stdin;
+vinhtruong	1	2022-05-22	sách hay quá đi
+\.
+
+
+--
+-- TOC entry 3337 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: book_book_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.book_book_id_seq', 16, true);
+
+
+--
+-- TOC entry 3177 (class 2606 OID 66235)
+-- Name: account account_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account
+    ADD CONSTRAINT account_pkey PRIMARY KEY (username);
+
+
+--
+-- TOC entry 3179 (class 2606 OID 66243)
+-- Name: book book_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.book
+    ADD CONSTRAINT book_pkey PRIMARY KEY (book_id);
+
+
+--
+-- TOC entry 3181 (class 2606 OID 66248)
+-- Name: cart oder_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cart
+    ADD CONSTRAINT oder_pkey PRIMARY KEY (username, book_id);
+
+
+--
+-- TOC entry 3183 (class 2606 OID 66265)
+-- Name: review review_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.review
+    ADD CONSTRAINT review_pkey PRIMARY KEY (username, book_id);
+
+
+--
+-- TOC entry 3184 (class 2606 OID 66249)
+-- Name: cart FK_ODER_ACCOUNT_username; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cart
+    ADD CONSTRAINT "FK_ODER_ACCOUNT_username" FOREIGN KEY (username) REFERENCES public.account(username);
+
+
+--
+-- TOC entry 3185 (class 2606 OID 66254)
+-- Name: cart FK_ODER_BOOK_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cart
+    ADD CONSTRAINT "FK_ODER_BOOK_id" FOREIGN KEY (book_id) REFERENCES public.book(book_id);
+
+
+--
+-- TOC entry 3186 (class 2606 OID 66266)
+-- Name: review FK_REVIEW_ACCOUNT_username; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.review
+    ADD CONSTRAINT "FK_REVIEW_ACCOUNT_username" FOREIGN KEY (username) REFERENCES public.account(username);
+
+
+--
+-- TOC entry 3187 (class 2606 OID 66271)
+-- Name: review FK_REVIEW_BOOK_bookid; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.review
+    ADD CONSTRAINT "FK_REVIEW_BOOK_bookid" FOREIGN KEY (book_id) REFERENCES public.book(book_id);
+
+
+-- Completed on 2022-05-26 15:15:13
+
+--
+-- PostgreSQL database dump complete
+--
+

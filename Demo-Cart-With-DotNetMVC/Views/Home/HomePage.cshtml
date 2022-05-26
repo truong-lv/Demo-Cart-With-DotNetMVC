@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Demo_Cart_With_DotNetMVC.Models.BookModel>
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@model IEnumerable<Demo_Cart_With_DotNetMVC.Models.BookModel>
 
 @{
     ViewData["Title"] = "HomePage";
@@ -51,7 +54,7 @@
 </script>
 
 @*//kiểm tra nếu người dùng đã đăng nhập và có giỏ hàng trên localStorage*@
-@{ if (mes != null)
+@{ if (@HttpContextAccessor.HttpContext.Session.GetString("username") != null)
     {
         <script type="text/javascript">
             if (localAdapter.getCart()) {
@@ -61,7 +64,7 @@
                     url: "/Cart/Orders?listBookId=" + listBookId,
                     success: function (value) {
                         localAdapter.clearCart();
-                        cart.items=[]
+                        cart.items = []
                     }, error: (er) => {
                         console.log(er.responseText)
                     }
