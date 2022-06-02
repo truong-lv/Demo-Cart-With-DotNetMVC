@@ -1,0 +1,8 @@
+# Demo-Cart-With-DotNetMVC (Training MWG)
+## Book-store cart
+- Application theories about session, cookie, localStorage/sessionStorage:
+   + Login/Logout (session, cookie)
+   + Add to cart: 
+      * With user is not logged in: save to localStorage
+      *  With user is logged in: save to database and if previously there are carts stored on localStorage it will automatically load into the database for the user.
+   + Restore comments (sessionStorage): user enters a comment (haven't clicked submit comment) and returns to the homepage (or other page), when the user returns to this comment page again the comment will be restored
