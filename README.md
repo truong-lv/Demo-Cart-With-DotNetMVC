@@ -1,6 +1,6 @@
 # Demo-Cart-With-DotNetMVC (Training MWG)
 ## Book-store cart
-- Application theories about session, cookie, localStorage/sessionStorage:
+- Apply knowledge about session, cookie, localStorage/sessionStorage:
    + Login/Logout (session, cookie)
    + Add to cart: 
       * With user is not logged in: save to localStorage
