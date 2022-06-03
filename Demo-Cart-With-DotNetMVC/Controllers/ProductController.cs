@@ -30,7 +30,7 @@ namespace Demo_Cart_With_DotNetMVC.Controllers
         public ActionResult ProductDetail(int id)
         {
             BookModel bookModel;
-            if(!memoryCache.TryGetValue<BookModel>("bookModel", out BookModel bookModelCache)){
+            if(!memoryCache.TryGetValue<BookModel>("bookDetail"+id, out BookModel bookModelCache)){
                 bookModel = new BookModel();
                 string sql = "SELECT * FROM book WHERE book_id=" + id;
                 Database db = new Database(sql, this.server);
@@ -47,17 +47,21 @@ namespace Demo_Cart_With_DotNetMVC.Controllers
                 db.Close();
 
                 //cấu hình tgian cho cache
-                MemoryCacheEntryOptions options = new MemoryCacheEntryOptions();
-                options.AbsoluteExpiration = DateTime.Now.AddMinutes(5);// hết hạn sau 5p dù có truy cập hay ko
-                options.SlidingExpiration = TimeSpan.FromMinutes(2);// hết hạn sau 2p nếu ko có truy cập nào
+                var cacheExpiryOptions = new MemoryCacheEntryOptions{
+                    AbsoluteExpiration = DateTime.Now.AddMinutes(5),// hết hạn sau 5p dù có truy cập hay ko
+                    SlidingExpiration = TimeSpan.FromMinutes(2),// hết hạn sau 2p nếu ko có truy cập nào
+                    Priority = CacheItemPriority.High //Thiết lập độ ưu tiên là Hight trong các độ ưu tiên (Low, Normal, High và NeverRemove )
 
-                memoryCache.Set<BookModel>("bookModel", bookModel);
+                };
+                
+
+                memoryCache.Set<BookModel>("bookDetail" + id, bookModel, cacheExpiryOptions);
                 ViewBag.checkCache = "Lấy từ DATABASE";
             }
             else
             {
                 ViewBag.checkCache = "Lấy từ CACHE";
-                bookModel = memoryCache.Get<BookModel>("bookModel");
+                bookModel = memoryCache.Get<BookModel>("bookDetail" + id);
             }
             
             //other: bookModel=memoryCache.GetOrCreate<BookModel>("bookModel", entry =>{.....})
