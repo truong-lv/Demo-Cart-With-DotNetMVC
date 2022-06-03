@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Demo Cart</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/home.css" />
+    <link rel="stylesheet" href="~/css/Site.min.css" />
+    @*<link rel="stylesheet" href="~/css/home.css" />
     <link rel="stylesheet" href="~/css/cart.css" />
-    <link rel="stylesheet" href="~/css/ProductDetail.css" />
+    <link rel="stylesheet" href="~/css/ProductDetail.css" />*@
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="~/js/myLocalStorage.js"></script>
-    @*<link rel="stylesheet" href="~/css/Login.css" />*@
+    <script src="~/js/MyLocalStorage.min.js"></script>
 </head>
 <body>
     <header>
@@ -59,10 +59,10 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-    <script src="~/js/CartHandle.js"></script>
+    @*<script src="~/js/CartHandle.js"></script>*@
+    <script src="~/js/Site.min.js" asp-append-version="true"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-   
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

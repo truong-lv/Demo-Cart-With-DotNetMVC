@@ -87,7 +87,6 @@ input[type=button], input[type=submit], input[type=reset] {
     margin: 5px 20px 40px 20px;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
@@ -118,7 +117,6 @@ input[type=text] {
     border: 2px solid #f6f6f6;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
-    -ms-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
     -webkit-border-radius: 5px 5px 5px 5px;
@@ -148,20 +146,6 @@ input[type=text] {
     animation-fill-mode: both;
 }
 
-@-webkit-keyframes fadeInDown {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
-    }
-
-    100% {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-    }
-}
-
 @keyframes fadeInDown {
     0% {
         opacity: 0;
@@ -177,7 +161,7 @@ input[type=text] {
 }
 
 /* Simple CSS3 Fade-in Animation */
-@-webkit-keyframes fadeIn {
+@keyframes fadeIn {
     from {
         opacity: 0;
     }
@@ -187,15 +171,6 @@ input[type=text] {
     }
 }
 
-@-moz-keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
 
 @keyframes fadeIn {
     from {

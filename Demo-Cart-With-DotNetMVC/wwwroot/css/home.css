@@ -35,14 +35,11 @@
     margin-top: 42px;
     text-align: center;
     color: black;
-    /* background-color: blue; */
+
     padding-top: 20px;
     padding-bottom: 20px;
-    /* background: url(../../image/footer.jpg) no-repeat center center
-		fixed; */
-}
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+}
 
 
 .card-body .itemside, .itemside {

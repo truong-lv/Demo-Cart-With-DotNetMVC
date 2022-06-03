@@ -27,12 +27,11 @@ namespace Demo_Cart_With_DotNetMVC
             services.AddControllersWithViews();
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddDistributedMemoryCache();
             services.AddSession(options => {
                 options.Cookie.Name = "user_id";
                 options.IdleTimeout = TimeSpan.FromHours(1);
             });
-
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

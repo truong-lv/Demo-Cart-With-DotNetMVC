@@ -1,0 +1,49 @@
+[
+  //Bundle and Minify style
+  {
+    "outputFileName": "wwwroot/css/Site.min.css",
+    "inputFiles": [
+      "wwwroot/css/cart.css",
+      "wwwroot/css/home.css",
+      "wwwroot/css/Login.css",
+      "wwwroot/css/ProductDetail.css",
+      "wwwroot/css/site.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  //Bundle and Minify scripts
+  {
+    "outputFileName": "wwwroot/js/Site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js",
+      "wwwroot/js/CartHandle.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/MyLocalStorage.min.js",
+    "inputFiles": [
+      "wwwroot/js/myLocalStorage.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/MyCookie.min.js",
+    "inputFiles": [
+      "wwwroot/js/myCookie.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  }
+]
