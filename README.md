@@ -1,4 +1,4 @@
-# Demo-Cart-With-DotNetMVC (Training MWG)
+# Demo-Cart-With-DotNetMVC
 ## Book-store cart
 - Apply knowledge about session, cookie, localStorage/sessionStorage:
    + Login/Logout (session, cookie)
